@@ -7,6 +7,8 @@ import { asyncCall } from "./modules/api.mjs";
 
 const id = window.location.href.split("=")[1];
 
+const isOwnerPost = localStorage.getItem("name") === id;
+
 const userPostsContainer = document.querySelector("#userPostsContainer");
 const name = document.querySelector("#name");
 const email = document.querySelector("#email");
@@ -57,17 +59,21 @@ getUserPosts();
 getUserData();
 
 avatar.addEventListener("click", () => {
-  imageData.avatar = true;
-  modalText.innerText = "Change avatar";
-  modal.style.display = "flex";
-  backdrop.style.display = "flex";
+  if (isOwnerPost) {
+    imageData.avatar = true;
+    modalText.innerText = "Change avatar";
+    modal.style.display = "flex";
+    backdrop.style.display = "flex";
+  }
 });
 
 banner.addEventListener("click", () => {
-  imageData.banner = true;
-  modalText.innerText = "Change banner";
-  modal.style.display = "flex";
-  backdrop.style.display = "flex";
+  if (isOwnerPost) {
+    imageData.banner = true;
+    modalText.innerText = "Change banner";
+    modal.style.display = "flex";
+    backdrop.style.display = "flex";
+  }
 });
 
 closeModal.addEventListener("click", () => {

@@ -93,6 +93,7 @@ oldest.addEventListener("click", async (e) => {
 /* 
  TODO: Legg til filter by tag funksjonalitet hvis du har tid
  TODO: Finn ut av om du har tid.
+ ...2 timer senere...
  INFO: Har ikke tid.
 */
 
