@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile</title>
+    <script type="module" src="./account.js" defer></script>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <nav
+      class="w-full fixed flex h-14 items-center justify-evenly bg-[#f5f5f5] z-50 border-b"
+    >
+      <a href="/" class="w-1/3 grid place-content-center font-bold">Socials</a>
+      <form
+        id="searchbar"
+        class="w-1/3 h-full flex items-center justify-center relative"
+      >
+        <i id="searchIcon" data-lucide="search" class="absolute left-3"></i>
+        <input
+          id="searchInput"
+          placeholder="Search socials..."
+          class="w-full h-10 rounded-full z-50 px-12 text-sm"
+        />
+        <div
+          id="searchBackdrop"
+          class="w-full h-full fixed hover:cursor-pointer top-0 bg-black/10 hidden"
+        ></div>
+
+        <div
+          id="searchResults"
+          class="w-full h-64 overflow-scroll hidden flex-col gap-2 px-3 py-3 overflow-x-hidden bg-white text-theme_dark border absolute top-14 rounded"
+        ></div>
+      </form>
+
+      <div class="w-1/3 flex items-center justify-center gap-3 relative">
+        <div class="flex gap-5 text-sm w-1/3 justify-end pr-3">
+          <a href="/">Home</a>
+          <a href="/feed.html">Feed</a>
+        </div>
+        <a
+          href="/login.html"
+          id="login_btn"
+          class="px-6 py-1 border border-theme_light text-theme_dark"
+        >
+          Login
+        </a>
+        <a
+          href="/register.html"
+          id="register_btn"
+          class="px-6 py-1 bg-theme_light text-white"
+        >
+          Register
+        </a>
+
+        <div
+          id="navbarUserIcon"
+          class="h-12 w-12 z-50 aspect-square hover:cursor-pointer rounded-full bg-theme_dark hidden"
+        >
+          <img
+            id="navbarUserImage"
+            class="w-full h-full rounded-full object-fill bg-theme_dark border-theme_dark border"
+          />
+        </div>
+        <div
+          id="profileDropdown"
+          class="fixed top-16 w-64 h-72 text-theme_dark bg-white z-50 rounded shadow py-5 hidden"
+        >
+          <div class="w-full h-full flex flex-col justify-between items-center">
+            <div class="w-full px-5">
+              <ul class="flex flex-col gap-6">
+                <a
+                  id="profileLink"
+                  href="/account.html?name=magugu"
+                  class="hover:bg-blue-950/5 px-2 rounded py-2"
+                  >Profile</a
+                >
+                <li class="px-2 rounded py-2 text-zinc-400">Settings</li>
+                <li class="px-2 rounded py-2 text-zinc-400">Account</li>
+              </ul>
+            </div>
+            <div class="w-full flex items-center justify-center">
+              <button
+                class="w-[90%] h-10 border border-red-500 text-red-700 rounded hover:scale-x-[1.02] duration-200 hover:bg-red-700 hover:text-red-100"
+                id="signOutBtn"
+              >
+                Sign Out
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <section id="bannerSection" class="pt-14">
+      <div
+        class="w-full h-72 bg-gradient-to-tr from-purple-600 to-pink-600/40 flex relative"
+      >
+        <img id="banner" class="w-full h-full object-cover" />
+        <div
+          class="w-32 h-32 rounded-full bg-gradient-to-b from-blue-700 to-blue-500 absolute -bottom-12 border-2 border-[#f5f5f5] left-1/2 -translate-x-1/2"
+        >
+          <img id="avatar" class="h-full w-full rounded-full object-cover" />
+        </div>
+      </div>
+      <div
+        class="w-full h-auto min-h-[100px] pt-14 flex flex-col items-center justify-center gap-3"
+      >
+        <p id="name" class="text-xl font-bold"></p>
+        <p id="email" class="text-sm"></p>
+
+        <div class="flex gap-12">
+          <div class="flex gap-1">
+            <p id="postCount"></p>
+            <p>post(s)</p>
+          </div>
+          <div class="flex gap-1">
+            <p id="followerCount"></p>
+            <p>Followers</p>
+          </div>
+          <div class="flex gap-1">
+            <p>Follows</p>
+            <p id="followCount"></p>
+          </div>
+        </div>
+      </div>
+      <div
+        class="w-full h-auto mt-12 flex flex-col items-center justify-center gap-3"
+      >
+        <h2 class="font-bold"></h2>
+        <div
+          id="userPostsContainer"
+          class="w-auto h-auto flex flex-col items-center justify-center gap-5 pt-12"
+        ></div>
+      </div>
+    </section>
+    <div
+      id="modal"
+      class="w-96 hidden z-40 h-64 bg-white shadow flex flex-col gap-6 items-center fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded"
+    >
+      <div class="w-full h-12 flex justify-end items-center pt-5 px-4">
+        <div
+          id="closeModal"
+          class="w-10 h-10 hover:bg-theme_dark/5 flex items-center justify-center rounded hover:cursor-pointer"
+        >
+          X
+        </div>
+      </div>
+      <h2 id="modalText" class="font-bold text-lg"></h2>
+
+      <div>
+        <input
+          type="text"
+          id="avatarInput"
+          class="w-full h-10 border border-theme_dark rounded px-3 py-1 text-sm"
+          placeholder="https://unsplash.com/image"
+        />
+        <button
+          id="avatarSubmit"
+          class="w-full h-10 border border-theme_dark hover:bg-theme_dark hover:text-blue-50 duration-150 rounded px-3 py-1 text-sm mt-3"
+        >
+          Post image
+        </button>
+      </div>
+    </div>
+    <div
+      id="backdrop"
+      class="w-full h-full bg-theme_dark/5 fixed top-0 left-0 hidden"
+    ></div>
+  </body>
+</html>
